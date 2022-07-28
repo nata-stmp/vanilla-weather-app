@@ -32,18 +32,24 @@ function formatDay(timestamp) {
 }
 
 //City and Temperature using API
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input-value");
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = searchInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}`;
+function search(city) {
   let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}&units=metric`).then(showWeather);
 }
 
+function searchCity(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-input-value");
+  let h1 = document.querySelector("h1");
+  search(searchInput.value);
+  h1.innerHTML = searchInput.value;
+}
+
 let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
+form.addEventListener("submit", searchCity);
+
+search("Kyiv");
 
 function convertTemp() {
   let celsiusTemp = document.querySelector(".today-temp");
