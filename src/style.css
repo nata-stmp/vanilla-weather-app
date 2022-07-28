@@ -42,3 +42,9 @@ li {
 .today-description {
   text-transform: capitalize;
 }
+
+.main-icon {
+  display: block;
+  font-size: 100px;
+  color: #ea8a8a;
+}

@@ -82,6 +82,12 @@ function showWeather(response) {
   yourCity.innerHTML = response.data.name;
   let currentDate = document.querySelector(".current-time");
   currentDate.innerHTML = formatDate(response.data.dt);
+  let iconElement = document.querySelector(".main-icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 // Button Section
