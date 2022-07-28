@@ -20,7 +20,7 @@ function formatDate(timestamp) {
     "Saturday",
   ];
   let day = days[date.getDay()];
-  return `${day}, <span class="digits">${hours}:${minutes}</span>`;
+  return `Last updated: ${day}, <span class="digits">${hours}:${minutes}</span>`;
 }
 
 function formatDay(timestamp) {
