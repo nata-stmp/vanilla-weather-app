@@ -1,3 +1,7 @@
+.wrapper {
+  margin: 0 auto;
+}
+
 .weather-app {
   max-width: 600px;
   margin: 150px auto;
@@ -33,4 +37,8 @@ li {
 .digits {
   font-weight: bold;
   color: #ea8a8a;
+}
+
+.today-description {
+  text-transform: capitalize;
 }
