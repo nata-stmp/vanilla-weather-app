@@ -1,11 +1,18 @@
+body {
+  background-color: #ebd5d5;
+}
+
 .wrapper {
   margin: 0 auto;
 }
 
 .weather-app {
-  max-width: 600px;
+  max-width: 1000px;
+  max-height: 700px;
   margin: 150px auto;
-  padding: 50px;
+  padding: 100px 150px 100px 150px;
+  background-color: #f5f5f5;
+  border-radius: 40px;
 }
 
 h1 {
@@ -47,4 +54,26 @@ li {
   display: block;
   font-size: 100px;
   color: #ea8a8a;
+}
+
+#search-input-value {
+  width: 600px;
+  height: 50px;
+  background: rgba(235, 213, 213, 0.8);
+  box-shadow: inset 0px 5px 10px #c9afaf;
+  border-radius: 7px;
+  border-style: none;
+  padding-left: 20px;
+}
+
+#search-button {
+  background-color: #ea8a8a;
+  border-style: none;
+  border-radius: 10px;
+  width: 130px;
+  height: 50px;
+  color: #f5f5f5;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 20px;
 }
