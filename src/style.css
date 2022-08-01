@@ -80,10 +80,6 @@ li {
   float: right;
 }
 
-/* .main-info {
-  display: flex;
-} */
-
 .right-side {
   float: right;
   margin-right: 0;
@@ -91,6 +87,21 @@ li {
   text-align: right;
 }
 
-/* .left-side {
-  float: left;
-} */
+.active {
+  cursor: default;
+  color: #685454;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: #685454;
+}
+
+a {
+  color: #ea8a8a;
+}
+
+a:hover {
+  color: #c9afaf;
+  text-decoration: none;
+}

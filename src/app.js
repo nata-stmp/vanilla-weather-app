@@ -51,37 +51,18 @@ form.addEventListener("submit", searchCity);
 
 search("Kyiv");
 
-function convertTemp() {
-  let celsiusTemp = document.querySelector(".today-temp");
-  let newTemp = Math.round((22 * 9) / 5 + 32);
-  celsiusTemp.innerHTML = newTemp + " ";
-}
-
-let fahrenheitTemperature = document.querySelector(".fahrenheit");
-fahrenheitTemperature.addEventListener("click", convertTemp);
-
-function convertBack() {
-  let basicTemp = document.querySelector(".today-temp");
-  basicTemp.innerHTML = 22 + " ";
-}
-
-let celsiusTemperature = document.querySelector(".celsius");
-celsiusTemperature.addEventListener("click", convertBack);
-
 //Formating date
 function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector(".today-temp");
-  currentTemp.innerHTML = temp + "°";
+  currentTemp.innerHTML = temp;
+  defaultTemperature = Math.round(response.data.main.temp);
   let wind = response.data.wind.speed;
   let currentWind = document.querySelector(".today-wind");
   currentWind.innerHTML = wind + " km/h";
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector(".today-humidity");
   currentHumidity.innerHTML = humidity + "%";
-  //   let pressure = response.data.main.pressure;
-  //   let currentPressure = document.querySelector(".today-pressure");
-  //   currentPressure.innerHTML = "<strong>Pressure</strong>: " + pressure + " hPa";
   let currentDescription = document.querySelector(".today-description");
   currentDescription.innerHTML = response.data.weather[0].description;
   let yourCity = document.querySelector("h1");
@@ -95,6 +76,31 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
+
+//Converting temperature: C to F and reverse
+let defaultTemperature = null;
+
+function convertTemp(event) {
+  event.preventDefault();
+  celsiusTemperature.classList.remove("active");
+  fahrenheitTemperature.classList.add("active");
+  let celsiusTemp = document.querySelector(".today-temp");
+  let fahrenheitTemp = Math.round((defaultTemperature * 9) / 5 + 32);
+  celsiusTemp.innerHTML = fahrenheitTemp;
+}
+
+let fahrenheitTemperature = document.getElementById("fahrenheit-temperature");
+fahrenheitTemperature.addEventListener("click", convertTemp);
+
+function convertBack() {
+  fahrenheitTemperature.classList.remove("active");
+  celsiusTemperature.classList.add("active");
+  let basicTemp = document.querySelector(".today-temp");
+  basicTemp.innerHTML = defaultTemperature;
+}
+
+let celsiusTemperature = document.getElementById("celsius-temperature");
+celsiusTemperature.addEventListener("click", convertBack);
 
 // Button Section
 function showPosition(position) {
