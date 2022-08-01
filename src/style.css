@@ -54,11 +54,12 @@ li {
   display: block;
   font-size: 100px;
   color: #ea8a8a;
+  float: right;
 }
 
 #search-input-value {
-  width: 600px;
-  height: 50px;
+  width: 500px;
+  height: 40px;
   background: rgba(235, 213, 213, 0.8);
   box-shadow: inset 0px 5px 10px #c9afaf;
   border-radius: 7px;
@@ -70,10 +71,26 @@ li {
   background-color: #ea8a8a;
   border-style: none;
   border-radius: 10px;
-  width: 130px;
-  height: 50px;
+  width: 100px;
+  height: 40px;
   color: #f5f5f5;
   font-family: "Inter";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
+  float: right;
 }
+
+/* .main-info {
+  display: flex;
+} */
+
+.right-side {
+  float: right;
+  margin-right: 0;
+  padding-right: 0;
+  text-align: right;
+}
+
+/* .left-side {
+  float: left;
+} */
