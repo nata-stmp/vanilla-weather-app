@@ -9,9 +9,9 @@ body {
 .weather-app {
   max-width: 1000px;
   max-height: 700px;
-  margin: 150px auto;
+  margin: 50px auto;
   padding: 100px 150px 100px 150px;
-  background-color: #f5f5f5;
+  background-color: #fafffa;
   border-radius: 40px;
 }
 
@@ -65,6 +65,10 @@ li {
   border-radius: 7px;
   border-style: none;
   padding-left: 20px;
+}
+
+#search-input-value:focus {
+  outline-color: #c9afaf;
 }
 
 #search-button {
@@ -139,4 +143,9 @@ h3.max-temp {
 
 h3.min-temp {
   color: #eebbbb;
+}
+
+.credentials {
+  margin-left: 35%;
+  text-align: right;
 }

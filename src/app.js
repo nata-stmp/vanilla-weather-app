@@ -51,10 +51,37 @@ form.addEventListener("submit", searchCity);
 
 search("Kyiv");
 
+//Adding forecast
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.getElementById("forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                <h2>${formatDay(forecastDay.dt)}</h2>
+                <img src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png" alt="" width="50px" />
+                <h3 class="max-temp"><i class="fa-solid fa-caret-up"></i> ${Math.round(
+                  forecastDay.temp.max
+                )}°</h3>
+                <h3 class="min-temp"><i class="fa-solid fa-caret-down"></i> ${Math.round(
+                  forecastDay.temp.min
+                )}°</h3>
+              </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 //Adding weather API data to the page
 function getCoordinates(coordinates) {
   let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
-  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -100,7 +127,8 @@ function convertTemp(event) {
 let fahrenheitTemperature = document.getElementById("fahrenheit-temperature");
 fahrenheitTemperature.addEventListener("click", convertTemp);
 
-function convertBack() {
+function convertBack(event) {
+  event.preventDefault();
   fahrenheitTemperature.classList.remove("active");
   celsiusTemperature.classList.add("active");
   let basicTemp = document.querySelector(".today-temp");
@@ -125,25 +153,3 @@ celsiusTemperature.addEventListener("click", convertBack);
 
 // let locationButton = document.querySelector(".share-location");
 // locationButton.addEventListener("click", getCurrentPosition);
-
-//Adding forecast
-function displayForecast(response) {
-  let forecast = response.data.daily;
-  let forecastElement = document.getElementById("forecast");
-  let forecastHTML = `<div class="row">`;
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                <h2>${forecastDay.dt}</h2>
-                <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="36px" />
-                <h3 class="max-temp">${forecastDay.temp.max}°</h3>
-                <h3 class="min-temp">${forecastDay.temp.min}°</h3>
-              </div>`;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
-displayForecast();
