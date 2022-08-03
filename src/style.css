@@ -105,3 +105,38 @@ a:hover {
   color: #c9afaf;
   text-decoration: none;
 }
+
+hr {
+  border-top: 1px solid #ebd5d5;
+  border-radius: 1px;
+  margin-top: 50px;
+}
+
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+
+h2 {
+  color: #685454;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+h3 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+h3.max-temp {
+  color: #ea8a8a;
+}
+
+h3.min-temp {
+  color: #eebbbb;
+}
