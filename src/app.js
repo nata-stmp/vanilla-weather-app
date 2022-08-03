@@ -31,6 +31,28 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+//Adding forecast
+function displayForecast() {
+  let forecastElement = document.getElementById("forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <h2>${day}</h2>
+                <img src="#" alt="" width="36px" />
+                <h3 class="max-temp">27</h3>
+                <h3 class="min-temp">24</h3>
+              </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
+
 //City and Temperature using API
 function search(city) {
   let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
@@ -51,7 +73,7 @@ form.addEventListener("submit", searchCity);
 
 search("Kyiv");
 
-//Formating date
+//Adding weather API data to the page
 function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector(".today-temp");
