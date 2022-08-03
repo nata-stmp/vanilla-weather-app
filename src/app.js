@@ -31,28 +31,6 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-//Adding forecast
-function displayForecast() {
-  let forecastElement = document.getElementById("forecast");
-  let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                <h2>${day}</h2>
-                <img src="#" alt="" width="36px" />
-                <h3 class="max-temp">27</h3>
-                <h3 class="min-temp">24</h3>
-              </div>`;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
-displayForecast();
-
 //City and Temperature using API
 function search(city) {
   let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
@@ -74,6 +52,12 @@ form.addEventListener("submit", searchCity);
 search("Kyiv");
 
 //Adding weather API data to the page
+function getCoordinates(coordinates) {
+  let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector(".today-temp");
@@ -97,6 +81,8 @@ function showWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getCoordinates(response.data.coord);
 }
 
 //Converting temperature: C to F and reverse
@@ -125,17 +111,39 @@ let celsiusTemperature = document.getElementById("celsius-temperature");
 celsiusTemperature.addEventListener("click", convertBack);
 
 // Button Section
-function showPosition(position) {
-  let yourLatitude = position.coords.latitude;
-  let yourLongitude = position.coords.longitude;
-  let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${yourLatitude}&lon=${yourLongitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showWeather);
+// function showPosition(position) {
+//   let yourLatitude = position.coords.latitude;
+//   let yourLongitude = position.coords.longitude;
+//   let apiKey = "54b81d6780000469aa10a2dbae3aa4ce";
+//   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${yourLatitude}&lon=${yourLongitude}&appid=${apiKey}&units=metric`;
+//   axios.get(apiUrl).then(showWeather);
+// }
+
+// function getCurrentPosition() {
+//   navigator.geolocation.getCurrentPosition(showPosition);
+// }
+
+// let locationButton = document.querySelector(".share-location");
+// locationButton.addEventListener("click", getCurrentPosition);
+
+//Adding forecast
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.getElementById("forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <h2>${forecastDay.dt}</h2>
+                <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="36px" />
+                <h3 class="max-temp">${forecastDay.temp.max}°</h3>
+                <h3 class="min-temp">${forecastDay.temp.min}°</h3>
+              </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
-
-let locationButton = document.querySelector(".share-location");
-locationButton.addEventListener("click", getCurrentPosition);
+displayForecast();
