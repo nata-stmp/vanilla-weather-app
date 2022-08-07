@@ -110,6 +110,8 @@ function showWeather(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
   getCoordinates(response.data.coord);
+  fahrenheitTemperature.classList.remove("active");
+  celsiusTemperature.classList.add("active");
 }
 
 //Converting temperature: C to F and reverse
